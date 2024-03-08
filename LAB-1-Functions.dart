@@ -1,34 +1,20 @@
 import 'dart:io';
 
 void main() {
+
+  print("Enter a string:");
+  String inputWord = stdin.readLineSync() ?? '';
+
  
-  print("Enter a number:");
-  int number = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
-
-
-  if (number < 1 || number > 100) {
-    print("Number out of range. Please enter a number between 1 and 100.");
-  } else {
-
-    if (primeChecker(number)) {
-      print("$number is a prime number.");
-    } else {
-      print("$number is a composite number.");
-    }
-  }
+  String reversedWord= reverseString(inputWord);
+  print(reversedWord);
 }
 
 
-bool primeChecker(int number) {
-  if (number <= 1) {
-    return false;
+String reverseString(String word) {
+  String reverse = '';
+  for (int i = word.length - 1; i >= 0; i--) {
+    reverse += word[i];
   }
-
-  for (int i = 2; i <= number / 2; i++) {
-    if (number % i == 0) {
-      return false;
-    }
-  }
-
-  return true;
+  return reverse;
 }
