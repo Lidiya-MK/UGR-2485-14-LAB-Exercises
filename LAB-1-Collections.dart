@@ -1,17 +1,9 @@
+import 'dart:math';
+
 void main() {
-  List<String> hobbies = ['Reading', 'writting', 'Photography'];
+  List<int> numbers = List.generate(10, (index) => Random().nextInt(10));
+  print('Old List of numbers: $numbers');
 
-  print('Initial Hobbies: $hobbies');
-
-  hobbies.add('Traveling');
-  print('Adding Hobbies : $hobbies');
-
-  hobbies.remove('Traveling');
-  print('Removing Hobbies: $hobbies');
-
-  hobbies.sort();
-  print('Sorting Hobies: $hobbies');
-
-  bool isListEmpty = hobbies.isEmpty;
-  print('Empty? $isListEmpty');
+  Set<int> noRepeat = Set.from(numbers);
+  print('List Of unique numbers: $noRepeat ');
 }
