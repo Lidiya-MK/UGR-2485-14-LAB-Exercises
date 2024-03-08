@@ -1,30 +1,19 @@
-class Rectangle {
-  double height;
-  double width;
-  
-  Rectangle(this.width, this.height);
-  
-  double areaCalculator() {
-    return height*width;
-  }
+class Product {
+  String name;
+  double price;
+  int quantity;
 
+  Product(this.name, this.price, this.quantity);
 
-  double perimeterCalculator() {
-    return 2*(width+height);
+  double totalCost() {
+    return price * quantity;
   }
 }
 
 void main() {
+  Product myProduct = Product("Gucci Bag", 10000.0, 3);
 
 
-  Rectangle myRectangle = Rectangle(7, 5);
-
-  double perimeter = myRectangle.perimeterCalculator();
-  print("The Perimeter of the rectangle is: $perimeter");
-
-  double area = myRectangle.areaCalculator();
-  print("The Area of the rectangle is: $area");
-
-
-
+  double totalCost = myProduct.totalCost();
+  print("The total cost for the ${myProduct.name}/s is  \$${totalCost.toStringAsFixed(2)}");
 }
