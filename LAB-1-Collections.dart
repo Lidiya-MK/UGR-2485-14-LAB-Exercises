@@ -1,9 +1,16 @@
-import 'dart:math';
-
 void main() {
-  List<int> numbers = List.generate(10, (index) => Random().nextInt(10));
-  print('Old List of numbers: $numbers');
+  Map<String, int> studentMarks = {'Bekelech': 85, 'Tamirat': 92, 'Tsege': 78};
 
-  Set<int> noRepeat = Set.from(numbers);
-  print('List Of unique numbers: $noRepeat ');
+  studentMarks['Debebe'] = studentMarks.putIfAbsent('Debebe', () => 88);
+  print('Here Debebe was added: $studentMarks');
+
+  studentMarks.forEach((name, mark) => print('$name: $mark'));
+
+  checkNameExists(studentMarks, 'Bekelech');
+  checkNameExists(studentMarks, 'Tamirat');
+}
+
+void checkNameExists(Map<String, int> marks, String name) {
+  bool hasName = marks.containsKey(name);
+  print('Does the map contain $name? $hasName');
 }
