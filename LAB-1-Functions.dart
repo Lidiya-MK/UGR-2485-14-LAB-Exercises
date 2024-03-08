@@ -1,14 +1,34 @@
+import 'dart:io';
+
 void main() {
+ 
+  print("Enter a number:");
+  int number = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-  double firstNumber = 20;
-  double secondNumber = 30;
-  double sum= adder(firstNumber, secondNumber);
 
-  
-  print("The sum of $firstNumber and $secondNumber is: $sum");
+  if (number < 1 || number > 100) {
+    print("Number out of range. Please enter a number between 1 and 100.");
+  } else {
+
+    if (primeChecker(number)) {
+      print("$number is a prime number.");
+    } else {
+      print("$number is a composite number.");
+    }
+  }
 }
 
 
-double adder(double a, double b) {
-  return a + b;
+bool primeChecker(int number) {
+  if (number <= 1) {
+    return false;
+  }
+
+  for (int i = 2; i <= number / 2; i++) {
+    if (number % i == 0) {
+      return false;
+    }
+  }
+
+  return true;
 }
