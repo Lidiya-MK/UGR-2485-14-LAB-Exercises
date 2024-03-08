@@ -1,19 +1,60 @@
-class Product {
-  String name;
-  double price;
-  int quantity;
+import 'dart:math';
 
-  Product(this.name, this.price, this.quantity);
 
-  double totalCost() {
-    return price * quantity;
+abstract class Shape {
+ 
+  double area();
+}
+
+
+class Circle extends Shape {
+  double radius;
+
+
+  Circle(this.radius);
+
+
+  @override
+  double area() {
+    return pi * radius * radius;
+  }
+}
+
+class Square extends Shape {
+  double side;
+
+
+  Square(this.side);
+
+
+  @override
+  double area() {
+    return side * side;
+  }
+}
+
+class Rectangle extends Shape {
+  double width;
+  double height;
+
+
+  Rectangle(this.width, this.height);
+
+
+  @override
+  double area() {
+    return width*height;
   }
 }
 
 void main() {
-  Product myProduct = Product("Gucci Bag", 10000.0, 3);
+  // Create Circle and Square objects
+  Circle circle1 = Circle(7);
+  Square square1 = Square(8);
+  Rectangle rectangle1 = Rectangle(8,9);
 
-
-  double totalCost = myProduct.totalCost();
-  print("The total cost for the ${myProduct.name}/s is  \$${totalCost.toStringAsFixed(2)}");
+  // Calculate and print the areas
+  print("Area of Circle: ${circle1.area().toStringAsFixed(2)}");
+  print("Area of Square: ${square1.area().toStringAsFixed(2)}");
+   print("Area of Rectabgle: ${rectangle1.area().toStringAsFixed(2)}");
 }
