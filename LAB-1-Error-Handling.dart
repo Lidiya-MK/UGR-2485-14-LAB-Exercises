@@ -1,12 +1,16 @@
-import 'dart:io';
+double divideNumbers(double numerator, double denominator) {
+  try {
+    if (denominator == 0) {
+      throw IntegerDivisionByZeroException(); // or DoubleDivisionByZeroException()
+    }
+    return numerator / denominator;
+  } catch (e) {
+    print('Error: Division by zero');
+    return double.nan;
+  }
+}
 
 void main() {
-  try {
-    stdout.write('Enter a number: ');
-    String userInput = stdin.readLineSync() ?? '';
-    int number = int.parse(userInput);
-    print('Integer value: $number');
-  } catch (e) {
-    print('Invalid input. Please enter a valid number.');
-  }
+  double result = divideNumbers(10, 0);
+  print('Result: $result');
 }
