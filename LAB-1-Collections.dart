@@ -1,16 +1,33 @@
 void main() {
-  Map<String, int> studentMarks = {'Bekelech': 85, 'Tamirat': 92, 'Tsege': 78};
+  List<Map<String, dynamic>> shoppingCart = [];
 
-  studentMarks['Debebe'] = studentMarks.putIfAbsent('Debebe', () => 88);
-  print('Here Debebe was added: $studentMarks');
+  void addItem(String productName, double price, int quantity) {
+    shoppingCart.add({'Product': productName, 'price': price, 'quantity': quantity});
+  }
 
-  studentMarks.forEach((name, mark) => print('$name: $mark'));
+  void total() {
+    double total = 0;
+    for (var item in shoppingCart) {
+      total += item['price'] * item['quantity'];
+    }
+    print('Total Price: \$${total.toStringAsFixed(2)}');
+  }
 
-  checkNameExists(studentMarks, 'Bekelech');
-  checkNameExists(studentMarks, 'Tamirat');
-}
+  void removeItem(String productName) {
+    shoppingCart.removeWhere((item) => item['Product'] == productName);
+  }
 
-void checkNameExists(Map<String, int> marks, String name) {
-  bool hasName = marks.containsKey(name);
-  print('Does the map contain $name? $hasName');
+  addItem('Shampoo', 700.99, 2);
+  addItem('Nivea Soft', 500.50, 3);
+  addItem('Broom', 100.50, 1);
+
+  print('Shopping Cart: $shoppingCart');
+
+  total();
+
+  removeItem('Shampoo');
+  
+  print('After removing the shampoo this will be left in the cart: $shoppingCart');
+
+  total();
 }
