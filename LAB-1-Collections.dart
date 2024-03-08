@@ -1,33 +1,18 @@
-void main() {
-  List<Map<String, dynamic>> shoppingCart = [];
+class Student {
+  String name;
+  List<int> marks;
 
-  void addItem(String productName, double price, int quantity) {
-    shoppingCart.add({'Product': productName, 'price': price, 'quantity': quantity});
-  }
+  Student(this.name, this.marks);
 
-  void total() {
-    double total = 0;
-    for (var item in shoppingCart) {
-      total += item['price'] * item['quantity'];
+  double averageMark() {
+    if (marks.isEmpty) {
+      return 0.0;
     }
-    print('Total Price: \$${total.toStringAsFixed(2)}');
+    return marks.reduce((a, b) => a + b) / marks.length;
   }
+}
 
-  void removeItem(String productName) {
-    shoppingCart.removeWhere((item) => item['Product'] == productName);
-  }
-
-  addItem('Shampoo', 700.99, 2);
-  addItem('Nivea Soft', 500.50, 3);
-  addItem('Broom', 100.50, 1);
-
-  print('Shopping Cart: $shoppingCart');
-
-  total();
-
-  removeItem('Shampoo');
-  
-  print('After removing the shampoo this will be left in the cart: $shoppingCart');
-
-  total();
+void main() {
+  Student student = Student('Kebedech', [85, 90, 92, 78, 88]);
+  print('${student.name}\'s average Mark is : ${student.averageMark().toStringAsFixed(2)}');
 }
