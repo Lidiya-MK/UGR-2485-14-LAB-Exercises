@@ -1,28 +1,30 @@
-import 'dart:async';
-import 'dart:math';
+import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-Future<String> fetchQuote() async {
+Future<void> downloadFile(String url, String savePath) async {
+  try {
+    // Send a GET request to the URL
+    final response = await http.get(Uri.parse(url));
 
-  await Future.delayed(Duration(seconds: 2));
-
-  
-  List<String> quotes = [
-    "Just when you think it can't get any worse, it can. And just when you think it can't get any better, it can. - John Lennon",
-    "It is difficult because we do not dare. - Franklin D. Roosevelt",
-    "We become what we think about - William Butler Yeats"
-  ];
-
-  // Return a random quote
-  Random random = Random();
-  return quotes[random.nextInt(quotes.length)];
+    // Check if the request was successful (status code 200)
+    if (response.statusCode == 200) {
+      // Write the downloaded content to a file
+      File(savePath).writeAsBytesSync(response.bodyBytes);
+      print('Download complete. File saved at: $savePath');
+    } else {
+      print('Failed to download file. Status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
 }
 
 void main() async {
-  print("Fetching a random quote...");
+  // Replace 'YOUR_FILE_URL' and 'YOUR_SAVE_PATH' with your file URL and desired save path
+  String fileUrl = 'https://irp-cdn.multiscreensite.com/cb9165b2/files/uploaded/The+48+Laws+Of+Power.pdf';
+  String savePath = 'C:\\';
 
-  // Use async/await to wait for the quote
-  String quote = await fetchQuote();
-
-  // Print the fetched quote
-  print( quote);
+  print('Downloading file...');
+  await downloadFile(fileUrl, savePath);
 }
